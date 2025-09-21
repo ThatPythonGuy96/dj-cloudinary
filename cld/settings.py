@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import cloudinary_storage, cloudinary
-
+import os
+from dotenv import load_dotenv
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -119,9 +121,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dk8uedsc9',
-    'API_KEY': '887746334268455',
-    'API_SECRET': 'O5zHR6c5tH45BvrSARTFvMhDgK8',
+    'CLOUD_NAME': os.environ.get('CLOUD_NAME'),
+    'API_KEY': os.environ.get('API_KEY'),
+    'API_SECRET': os.environ.get('API_SECRET'),
     'SECURE': True,
 }
 STATIC_URL = 'static/'
@@ -129,9 +131,9 @@ STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE  = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 cloudinary.config( 
-    cloud_name = 'dk8uedsc9', 
-    api_key = '887746334268455', 
-    api_secret = 'O5zHR6c5tH45BvrSARTFvMhDgK8' 
+    cloud_name = os.environ.get('CLOUD_NAME'), 
+    api_key = os.environ.get('API_KEY'), 
+    api_secret = os.environ.get('API_SECRET') 
 )
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
